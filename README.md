@@ -1,14 +1,17 @@
-# RBAC configuration stored in separate modules in Yii 2 application
+# Yii 2 RBAC configuration stored in separate modules
 
-This extension provides layer between Yii 2 AuthManager and access configuration that can be stored in separate config classes into your application modules.
+This extension provides layer between Yii 2 AuthManager and access configuration that can be stored in separate config classes in application modules.
+
 It is useful for large projects where you have truckload of access rules, roles and other stuff.
+
 When you organize your RBAC code in modules - you can easy manage it.
-yii2-rbac-collector - is only console application component - you don't have to change something in your web application - just use Yii::$app->authManager as you used it before.
+
+It is only console application component - you don't have to change something in your web application - just use Yii::$app->authManager as you used it before.
 
 
 ## Installation
 
-My favorite way to install this extension is through [composer](http://getcomposer.org/download/).
+Install this extension through [composer](http://getcomposer.org/download/).
 
 Either run
 
@@ -26,7 +29,7 @@ to the `require` section of your `composer.json` file.
 
 ## Configuring
 
-Add rbacc module into your modules section in console application config.
+Add rbacc module into your modules section in *console application* config.
 
 ```php
 'modules' => [
@@ -106,7 +109,10 @@ class Config extends ConfigBase
 
 For updating RBAC configuration after some changes jus run following command:
 
-yii rbacc/update
+```bash
+$ yii rbacc/update
+```
+
 
 Collector will read your config classes and update RBAC data using your current AuthManager - PhpManager or DbManager
 
