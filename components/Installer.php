@@ -120,6 +120,7 @@ class Installer extends Component
             if ($item_exist) {
 
                 if ($item_exist instanceof Rule) {
+                    $item->updatedAt = $item_exist->updatedAt;
                     $need_update = serialize($item_exist) != serialize($item);
                 } else {
                     $need_update = $item_exist->description != $item->description || $item_exist->ruleName != $item->ruleName || $item_exist->data != $item->data;
