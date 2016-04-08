@@ -74,6 +74,7 @@ class Installer extends Component
                     if (isset($value['rule']) && $value['rule'] instanceof Rule) {
                         /** @var Rule $rule */
                         $rule = $value['rule'];
+                        $rule->updatedAt = time();
                         $item->ruleName = !empty($rule->name) ? $rule->name : $rule::className();
                         $this->_items[$item->ruleName] = $rule;
                     }
