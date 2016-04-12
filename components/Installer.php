@@ -55,6 +55,18 @@ class Installer extends Component
 
             foreach ($c->getData() as $key => $value) {
                 if (is_array($value)) {
+                    
+                    if (count($value) == 1 && isset($value['children']) && is_array($value['children'])) {
+                        if (!isset($this->_children[$key])) {
+                            $this->_children[$key] = [];
+                        }
+
+                        foreach ($value['children'] as $kid) {
+                            $this->_children[$key][] = $kid;
+                        }
+
+                        continue;
+                    }
 
                     if (!isset($value['type'])) {
                         throw new InvalidConfigException('Please specify type for ' . $key . ' auth item!');
