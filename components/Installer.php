@@ -200,5 +200,6 @@ class Installer extends Component
         $this->generateItems($collection);
         $this->manageItems();
         $this->manageRelations();
+        $this->_auth->invalidateCache();
     }
 }
