@@ -201,7 +201,7 @@ class Installer extends Component
         $this->manageItems();
         $this->manageRelations();
         if($this->_auth instanceof \yii\rbac\DbManager){
-            $this->_auth->cache->delete($this->_auth->cacheKey);
+            $this->_auth->invalidateCache();
         }
     }
 }
