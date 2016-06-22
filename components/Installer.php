@@ -12,6 +12,7 @@ use yii\rbac\Role;
 use yii\rbac\Rule;
 use yii\helpers\Console;
 use yii\base\InvalidParamException;
+use __PHP_Incomplete_Class;
 
 /**
  * Class Installer
@@ -55,7 +56,7 @@ class Installer extends Component
 
             foreach ($c->getData() as $key => $value) {
                 if (is_array($value)) {
-                    
+
                     if (count($value) == 1 && isset($value['children']) && is_array($value['children'])) {
                         if (!isset($this->_children[$key])) {
                             $this->_children[$key] = [];
@@ -131,8 +132,9 @@ class Installer extends Component
             }
 
             if ($item_exist) {
-
-                if ($item_exist instanceof Rule) {
+                if ($item_exist instanceof __PHP_Incomplete_Class) {
+                    $need_update = true;
+                } else if ($item_exist instanceof Rule) {
                     $item->updatedAt = $item_exist->updatedAt;
                     $need_update = serialize($item_exist) != serialize($item);
                 } else {
@@ -172,7 +174,7 @@ class Installer extends Component
             foreach ($kids as $k) {
                 $kid = $this->_items[$k];
 
-                if (!$this->_auth->hasChild($parent, $kid) && $this->_auth->canAddChild($parent, $kid)) {
+                if (!$this->_auth->hasChild($parent, $kid)) {
                     Console::stdout($kid->name . ' added as a child of ' . $parent->name . "\n");
                     $this->_auth->addChild($parent, $kid);
                 }
@@ -200,7 +202,7 @@ class Installer extends Component
         $this->generateItems($collection);
         $this->manageItems();
         $this->manageRelations();
-        if($this->_auth instanceof \yii\rbac\DbManager){
+        if ($this->_auth instanceof \yii\rbac\DbManager) {
             $this->_auth->invalidateCache();
         }
     }
