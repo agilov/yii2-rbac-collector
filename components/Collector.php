@@ -1,4 +1,5 @@
 <?php
+
 namespace rbacc\components;
 
 use Yii;
@@ -38,7 +39,7 @@ class Collector extends Component
     /**
      * Collect configs
      *
-     * @return ConfigBase[]
+     * @return array
      * @throws InvalidConfigException
      */
     protected function collect()
@@ -46,12 +47,15 @@ class Collector extends Component
         $result = [];
 
         foreach ($this->_module->collection as $c) {
-
-            if (!class_exists($c)) {
+            if (class_exists($c)) {
+                /** @var \rbacc\components\ConfigBase $config */
+                $config = Yii::createObject($c);
+                $result[] = $config->getData();
+            } elseif (file_exists(Yii::getAlias($c))) {
+                $result[] = require Yii::getAlias($c);
+            } else {
                 throw new InvalidConfigException('Class ' . $c . ' does not exist!');
             }
-
-            $result[] = Yii::createObject($c);
         }
 
         return $result;

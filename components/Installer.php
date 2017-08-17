@@ -49,12 +49,7 @@ class Installer extends Component
 
         foreach ($collection as $c) {
 
-            /** @var ConfigBase $c */
-            if (!($c instanceof ConfigBase)) {
-                throw new \RuntimeException('Invalid configuration source given.');
-            }
-
-            foreach ($c->getData() as $key => $value) {
+            foreach ($c as $key => $value) {
                 if (is_array($value)) {
 
                     if (count($value) == 1 && isset($value['children']) && is_array($value['children'])) {
