@@ -2,14 +2,12 @@
 
 namespace rbacc\components;
 
-use yii\base\Object;
-
 /**
  * Class ConfigSource
  *
  * @package rbacc\components
  */
-abstract class ConfigBase extends Object
+abstract class ConfigBase
 {
     /**
      * @return array
