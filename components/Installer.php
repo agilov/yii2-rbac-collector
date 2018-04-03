@@ -83,7 +83,7 @@ class Installer extends Component
                         /** @var Rule $rule */
                         $rule = $value['rule'];
                         $rule->updatedAt = time();
-                        $item->ruleName = !empty($rule->name) ? $rule->name : $rule::className();
+                        $item->ruleName = !empty($rule->name) ? $rule->name : get_class($rule);
                         $this->_items[$item->ruleName] = $rule;
                     }
 
